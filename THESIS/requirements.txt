@@ -1,0 +1,8 @@
+numpy>=1.24
+mujoco>=3.0.0
+casadi>=3.6
+cma>=3.3
+gymnasium>=0.29
+stable-baselines3>=2.2
+matplotlib>=3.7
+torch

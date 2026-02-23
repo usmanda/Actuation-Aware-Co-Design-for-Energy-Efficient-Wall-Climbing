@@ -1,0 +1,54 @@
+<mujoco>
+  <option timestep="0.005" gravity="0 0 -9.81"/>
+  
+  <worldbody>
+
+    <!-- Floor  -->
+    <geom type="plane" size="12 12 0.1"
+          rgba="0.9 0.85 0.2 1"/>
+
+    <!-- Wall  -->
+    <geom type="box" size="0.05 20 12" pos="1.0 0 1"
+          rgba="1.0 1.0 1.0 1" friction="1 1 1"/>
+
+    <!-- Torso (red) -->
+    <body name="torso" pos="0.404 0 1">
+       <joint name="torso_slide_x" type="slide" axis="-1 0 0" damping="5"/>
+      <joint name="torso_slide_z" type="slide" axis="0 0 1" damping="5"/>
+      <geom type="box" size="0.05 0.05 0.05"
+            rgba="0.85 0.2 0.2 1"/>
+
+      <!-- Left leg (blue) -->
+      <body name="left_leg" pos="0 0 -0.05">
+        <joint name="hip_L" type="hinge" axis="0 1 0" range = "-22 22" damping="20"/>
+        <geom type="capsule"
+              fromto="0 0 0 0.596 0 0"
+              size="0.02"
+              rgba="0.2 0.6 0.9 1"/>
+        <!-- Left tip (cyan) -->
+        <site name="left_tip" pos="0.596 0 0" size="0.01"
+              rgba="0.0 0.9 0.9 1"/>
+      </body>
+
+      <!-- Right leg (green) -->
+      <body name="right_leg" pos="0 0 0.05">
+        <joint name="hip_R" type="hinge" axis="0 1 0" range = "-22 22" damping="20"/>
+        <geom type="capsule"
+              fromto="0 0 0 0.596 0 0"
+              size="0.02"
+              rgba="0.2 0.8 0.3 1"/>
+        <!-- Right tip (yellow) -->
+        <site name="right_tip" pos="0.596 0 0" size="0.01"
+              rgba="0.95 0.9 0.1 1"/>
+      </body>
+
+    </body>
+  </worldbody>
+
+  <!-- Actuators -->
+  <actuator>
+    <motor joint="hip_L" gear="70" ctrlrange="-1 1"/>
+    <motor joint="hip_R" gear="70" ctrlrange="-1 1"/>
+  </actuator>
+
+</mujoco>
